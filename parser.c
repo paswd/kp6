@@ -6,7 +6,7 @@
 #include "string.h"
 #include "database.h"
 
-struct _expression_note {
+struct _expression_data {
 	size_t field;
 	union {
 		size_t id;
@@ -21,12 +21,7 @@ struct _expression_note {
 	} data;
 };
 
-struct _expression_data {
-	Exptession_Note *notes;
-	size_t size;
-};
-
-bool sql_parse(Database *db, String str)
+Database *sql_parse(Database *db, String str)
 {
 	/*
 	select
@@ -49,6 +44,8 @@ bool sql_parse(Database *db, String str)
 	if (strstr(str.value, "truncate") || strstr(str.value, "TRUNCATE"))
 		mode = 5;
 
+	Database *res;
+
 	bool is_expression = false;
 	if (strstr(str.value, "where") || strstr(str.value, "WHERE"))
 		is_expression = true;
@@ -60,20 +57,20 @@ bool sql_parse(Database *db, String str)
 		case 3:
 		case 4:
 			if (!is_expression)
-				return false;
+				return NULL;
+			database_delete_note(db, expression_parse(str));
 
 
 		case 5:
 			database_clear(db);
-			return true;
-		default:
-			return false;
+			break;
 	}
 
-
+	return res;
 }
 
-Expression_Data expression_parse(String str, size_t pos)
+Expression_Data expression_parse(String str)
 {
-	
+	Expression_Data dat;
+	size_t val
 }

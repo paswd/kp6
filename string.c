@@ -39,3 +39,11 @@ bool is_str_equal(String str1, String str2)
 	}
 	return true;
 }
+
+String substring_copy(String str, size_t start, size_t end)
+{
+	String res;
+	res.value = NULL;
+	res.size = 0;
+	if (start > end || end > )
+}

@@ -14,6 +14,7 @@ String get_str(void);
 String str_clear(void);
 String str_add(String str, char sym);
 bool is_str_equal(String str1, String str2);
+String substring_copy(String str, size_t start, size_t end);
 
 
 #endif
