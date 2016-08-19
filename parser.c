@@ -5,6 +5,7 @@
 #include <string.h>
 #include "string.h"
 #include "database.h"
+#include "note.h"
 
 struct _expression_data {
 	size_t field;
@@ -53,13 +54,26 @@ Database *sql_parse(Database *db, String str)
 
 	switch (mode) {
 		case 1:
+			if (!is_expression)
+				return NULL;
+			res = database_select(db, expression_parse(str));
+			break;
 		case 2:
+			database_insert(db, Note note);
+			res = db;
+			break;
 		case 3:
+			if (!is_expression)
+				return NULL;
+			database_update(db, update_set_parse(str), expression_parse(str));
+			res = db;
+			break;
 		case 4:
 			if (!is_expression)
 				return NULL;
 			database_delete_note(db, expression_parse(str));
-
+			res = db;
+			break;
 
 		case 5:
 			database_clear(db);
