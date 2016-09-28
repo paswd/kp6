@@ -70,7 +70,9 @@ Database *database_select(Database *db, Expression *where)
 
 void database_insert(Database *db, Note note)
 {
-
+	db->size++;
+	db->note = (Note *) realloc(db->note, db->size * sizeof(Note));
+	db->note[db->size - 1] = note;
 }
 
 void database_update(Database *db, Expression *set, Expression *where)
@@ -80,7 +82,16 @@ void database_update(Database *db, Expression *set, Expression *where)
 
 void database_delete_note(Database *db, Expression *where)
 {
-
+	size_t deleted = 0;
+	for (size_t i = 0; i < db->size; i++) {
+		if (is_expression_satisfied(db->note[i], where)) {
+			deleted++;
+			continue;
+		}
+		db->note[i - deleted] = db->note[i];
+	}
+	db->size -= deleted;
+	db->note = (Note *) realloc(db->note, db->size * sizeof(Note));
 }
 
 bool database_import(Database *db)
