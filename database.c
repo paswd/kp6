@@ -50,7 +50,22 @@ void database_clear(Database *db)
 
 Database *database_select(Database *db, Expression *where)
 {
-	
+	Database *res = database_create();
+	Queue *queue = queue_create();
+	size_t cnt = 0;
+	for (size_t i = 0; i < db->size; i++) {
+		if (is_expression_satisfied(db->note[i], where)) {
+			queue_push(queue, db->note[i]);
+			cnt++;
+		}
+	}
+	res->size = cnt;
+	res->note = (Note *) calloc(res->size, sizeof(Note));
+	for (size_t i = 0; i < res->size; i++) {
+		res->note[i] = queue_pop(queue);
+	}
+	queue_destroy(&queue);
+	return res;
 }
 
 void database_insert(Database *db, Note note)
