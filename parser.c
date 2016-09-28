@@ -6,21 +6,7 @@
 #include "string.h"
 #include "database.h"
 #include "note.h"
-
-struct _expression_data {
-	size_t field;
-	union {
-		size_t id;
-		String surname;
-		String initials;
-		bool gender;
-		String group;
-		char mark_linal;
-		char mark_dm;
-		char mark_matan;
-		char mark_inf;
-	} data;
-};
+#include "expression.h"
 
 Database *sql_parse(Database *db, String str)
 {
@@ -83,8 +69,14 @@ Database *sql_parse(Database *db, String str)
 	return res;
 }
 
-Expression_Data expression_parse(String str)
+Expression *expression_parse(String str)
 {
-	Expression_Data dat;
-	size_t val
+	Expression dat;
+	//size_t val;
+	return dat;
+}
+Expression *update_set_parse(String str)
+{
+	Expression dat;
+	return dat;
 }
