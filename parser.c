@@ -8,6 +8,18 @@
 #include "note.h"
 #include "expression.h"
 
+Expression *expression_parse(String str)
+{
+	Expression *dat;
+	//size_t val;
+	return dat;
+}
+Expression *update_set_parse(String str)
+{
+	Expression *dat;
+	return dat;
+}
+
 Database *sql_parse(Database *db, String str)
 {
 	/*
@@ -67,16 +79,4 @@ Database *sql_parse(Database *db, String str)
 	}
 
 	return res;
-}
-
-Expression *expression_parse(String str)
-{
-	Expression dat;
-	//size_t val;
-	return dat;
-}
-Expression *update_set_parse(String str)
-{
-	Expression dat;
-	return dat;
 }

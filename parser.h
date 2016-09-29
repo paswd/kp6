@@ -6,8 +6,8 @@
 
 //typedef _expression_data Expression_data;
 
-Database *sql_parse(Database *db, String str);
 Expression *expression_parse(String str);
 Expression *update_set_parse(String str);
+Database *sql_parse(Database *db, String str);
 
 #endif

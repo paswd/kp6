@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "expression.h"
 
 Expression *expression_create()
 {

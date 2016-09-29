@@ -15,13 +15,14 @@ Database *database_create(void);
 void database_destroy(Database **db);
 
 void database_clear(Database *db);
-Database *database_select(Database *db, Expression_Data *where);
+Database *database_select(Database *db, Expression *where);
 void database_insert(Database *db, Note note);
-void database_update(Database *db, Expression_Data *set, Expression_Data *where);
-void database_delete_note(Database *db, Expression_Data *where);
+void database_update(Database *db, Expression *set, Expression *where);
+void database_delete_note(Database *db, Expression *where);
 
 bool database_import(Database *db);
 bool database_export(Database *db);
 size_t get_note_size();
+bool is_expression_satisfied(Note note, Expression *exp);
 
 #endif

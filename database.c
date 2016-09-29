@@ -77,7 +77,41 @@ void database_insert(Database *db, Note note)
 
 void database_update(Database *db, Expression *set, Expression *where)
 {
-
+	for (size_t i = 0; i < db->size; i++) {
+		if (is_expression_satisfied(db->note[i], where)) {
+			for (size_t j = 0; j < set->size; j++) {
+				switch (set->arr[j].type) {
+					case ID:
+						db->note[i].id = set->arr[j].id;
+						break;
+					case SURNAME:
+						db->note[i].id = set->arr[j].id;
+						break;	
+					case INITIALS:
+						db->note[i].id = set->arr[j].id;
+						break;
+					case GENDER:
+						db->note[i].id = set->arr[j].id;
+						break;
+					case GROUP:
+						db->note[i].id = set->arr[j].id;
+						break;
+					case MARK_LINAL:
+						db->note[i].id = set->arr[j].id;
+						break;
+					case MARK_DM:
+						db->note[i].id = set->arr[j].id;
+						break;
+					case MARK_MATAN:
+						db->note[i].id = set->arr[j].id;
+						break;
+					case MARK_INF:
+						db->note[i].id = set->arr[j].id;
+						break;
+				}
+			}
+		}
+	}
 }
 
 void database_delete_note(Database *db, Expression *where)
@@ -137,39 +171,39 @@ bool is_expression_satisfied(Note note, Expression *exp)
 	for (size_t i = 0; i < exp->size; i++) {
 		switch (exp->arr[i].type) {
 			case ID:
-				if (note.id != exp->arr[i].data.id)
+				if (note.id != exp->arr[i].id)
 					return false;
 				break;
 			case SURNAME:
-				if (note.surname != exp->arr[i].data.surname)
+				if (!is_str_equal(note.surname, exp->arr[i].surname))
 					return false;
 				break;	
 			case INITIALS:
-				if (note.initials != exp->arr[i].data.initials)
+				if (!is_str_equal(note.initials, exp->arr[i].initials))
 					return false;
 				break;
 			case GENDER:
-				if (note.gender != exp->arr[i].data.gender)
+				if (note.gender != exp->arr[i].gender)
 					return false;
 				break;
 			case GROUP:
-				if (note.group != exp->arr[i].data.group)
+				if (!is_str_equal(note.group, exp->arr[i].group))
 					return false;
 				break;
 			case MARK_LINAL:
-				if (note.mark_linal != exp->arr[i].data.mark_linal)
+				if (note.mark_linal != exp->arr[i].mark_linal)
 					return false;
 				break;
 			case MARK_DM:
-				if (note.mark_dm != exp->arr[i].data.mark_dm)
+				if (note.mark_dm != exp->arr[i].mark_dm)
 					return false;
 				break;
 			case MARK_MATAN:
-				if (note.mark_matan != exp->arr[i].data.mark_matan)
+				if (note.mark_matan != exp->arr[i].mark_matan)
 					return false;
 				break;
 			case MARK_INF:
-				if (note.mark_inf != exp->arr[i].data.mark_inf)
+				if (note.mark_inf != exp->arr[i].mark_inf)
 					return false;
 				break;
 		}
